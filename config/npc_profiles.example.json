@@ -1,0 +1,34 @@
+{
+  "npc_profiles": [
+    {
+      "npc_id": "example_character_1",
+      "name": "Example Character",
+      "personality": {
+        "traits": ["curious", "friendly", "optimistic"],
+        "big_five": {
+          "openness": 0.8,
+          "conscientiousness": 0.6,
+          "extraversion": 0.7,
+          "agreeableness": 0.8,
+          "neuroticism": 0.3
+        }
+      },
+      "backstory": "A curious explorer who loves discovering new places and meeting new people.",
+      "goals": ["Explore the world", "Help others"],
+      "quirks": ["Always asks questions", "Enthusiastic about discoveries"],
+      "speech_patterns": {
+        "vocabulary": ["wonderful", "amazing", "fascinating"],
+        "tone": "enthusiastic",
+        "formality": "casual"
+      },
+      "voice_config": {
+        "voice_id": "default",
+        "speed": 1.0,
+        "pitch": 1.0,
+        "accent": "neutral"
+      },
+      "relationships": {}
+    }
+  ]
+}
+

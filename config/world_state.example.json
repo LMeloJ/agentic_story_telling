@@ -1,0 +1,23 @@
+{
+  "initial_world_state": {
+    "locations": [
+      {
+        "location_id": "starting_location",
+        "name": "Starting Point",
+        "description": "The beginning of your journey"
+      }
+    ],
+    "events": [],
+    "timeline": {
+      "current_time": 0,
+      "events": []
+    },
+    "relationships": {},
+    "story_progression": {
+      "current_chapter": 1,
+      "completed_events": [],
+      "active_quests": []
+    }
+  }
+}
+
