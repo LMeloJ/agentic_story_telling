@@ -58,7 +58,7 @@ User Input → Story Orchestrator → NPC Agent
 - **LangGraph**: Agent orchestration and state management
 - **ChromaDB**: Vector database for semantic memory storage
 - **Google Gemini API**: LLM for character dialog generation
-- **PyQt6/PySide6**: Desktop GUI framework
+- **Kivy**: Desktop GUI framework
 - **Python 3.10+**: Core application language
 
 ## Design Patterns

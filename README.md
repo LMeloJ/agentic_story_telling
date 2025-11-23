@@ -25,7 +25,7 @@ Dynevi is a theater-of-the-mind storytelling application that combines:
 - **LangGraph**: Agent orchestration and workflow management
 - **ChromaDB**: Vector database for memory storage and retrieval
 - **Google Gemini API**: Character dialog generation
-- **PyQt6/PySide6**: GUI framework for desktop application
+- **Kivy**: GUI framework for desktop application
 - **uv**: Python package and environment management
 
 ## Project Structure

@@ -12,7 +12,7 @@ from pydantic import BaseModel, Field, field_validator
 class GeminiConfig(BaseModel):
     """Gemini API configuration."""
     api_key: str = Field(..., description="Google Gemini API key")
-    model: str = Field(default="gemini-pro", description="Gemini model to use")
+    model: str = Field(default="gemini-2.5-flash", description="Gemini model to use (e.g., gemini-2.5-flash, gemini-2.5-pro)")
     timeout: int = Field(default=30, description="API timeout in seconds")
     max_retries: int = Field(default=3, description="Maximum retry attempts")
 
@@ -100,7 +100,7 @@ class Config(BaseModel):
         return cls(
             gemini=GeminiConfig(
                 api_key=os.getenv("GEMINI_API_KEY", ""),
-                model=os.getenv("GEMINI_MODEL", "gemini-pro"),
+                model=os.getenv("GEMINI_MODEL", "gemini-2.5-flash"),
                 timeout=int(os.getenv("API_TIMEOUT_SECONDS", "30")),
                 max_retries=int(os.getenv("GEMINI_MAX_RETRIES", "3")),
             ),
