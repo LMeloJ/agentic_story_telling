@@ -5,14 +5,196 @@ Create an immersive storytelling experience where NPC characters have AI-generat
 
 ---
 
+## Git Branch Management Strategy
+
+### Branch Structure
+
+The project follows a **Git Flow**-inspired branching strategy with the following branches:
+
+#### Main Branches
+
+1. **`master`** (or `main`)
+   - Production-ready code
+   - Always stable and deployable
+   - Protected branch (no direct commits)
+   - Only updated via merges from `develop` or hotfix branches
+   - Each commit should represent a release version
+
+2. **`develop`**
+   - Integration branch for completed features
+   - Main development branch
+   - Should always be in a working state
+   - All feature branches merge into `develop`
+   - When ready for release, merge `develop` → `master`
+
+#### Supporting Branches
+
+3. **`feature/*`**
+   - Feature development branches
+   - Naming convention: `feature/phase-X-task-name` or `feature/description`
+   - Examples:
+     - `feature/phase1-gemini-integration`
+     - `feature/phase2-memory-system`
+     - `feature/npc-agent-system`
+   - Branch from: `develop`
+   - Merge back to: `develop`
+   - Delete after merge
+
+4. **`bugfix/*`**
+   - Bug fixes for the current release
+   - Naming convention: `bugfix/issue-description`
+   - Branch from: `develop`
+   - Merge back to: `develop` and `master` (if needed)
+   - Delete after merge
+
+5. **`hotfix/*`**
+   - Critical fixes for production
+   - Naming convention: `hotfix/issue-description`
+   - Branch from: `master`
+   - Merge back to: `master` and `develop`
+   - Delete after merge
+
+6. **`release/*`** (optional)
+   - Preparation for new releases
+   - Naming convention: `release/vX.Y.Z`
+   - Branch from: `develop`
+   - Merge back to: `master` and `develop`
+   - Used for release preparation, version bumping, final testing
+
+### Workflow Guidelines
+
+#### Starting a New Feature
+
+```bash
+# Ensure develop is up to date
+git checkout develop
+git pull origin develop
+
+# Create and switch to feature branch
+git checkout -b feature/phase1-gemini-integration
+
+# Work on feature, commit regularly
+git add .
+git commit -m "feat: implement Gemini API integration"
+
+# Push feature branch
+git push -u origin feature/phase1-gemini-integration
+```
+
+#### Completing a Feature
+
+```bash
+# Ensure feature branch is up to date with develop
+git checkout feature/your-feature
+git pull origin develop
+git rebase develop  # or merge develop into feature branch
+
+# Push updated feature branch
+git push origin feature/your-feature
+
+# Create Pull Request (PR) to merge into develop
+# After PR is reviewed and approved, merge via GitHub interface
+# Then delete the feature branch locally and remotely
+git checkout develop
+git pull origin develop
+git branch -d feature/your-feature
+git push origin --delete feature/your-feature
+```
+
+#### Commit Message Convention
+
+Follow [Conventional Commits](https://www.conventionalcommits.org/) format:
+
+- `feat:` - New feature
+- `fix:` - Bug fix
+- `docs:` - Documentation changes
+- `style:` - Code style changes (formatting, etc.)
+- `refactor:` - Code refactoring
+- `test:` - Adding or updating tests
+- `chore:` - Maintenance tasks, dependency updates
+- `perf:` - Performance improvements
+
+Examples:
+```
+feat: add ChromaDB memory storage system
+fix: resolve memory retrieval timeout issue
+docs: update API documentation for NPC agents
+refactor: improve context assembly logic
+test: add unit tests for memory system
+```
+
+#### Branch Protection Rules (Recommended)
+
+For `master` and `develop` branches:
+- Require pull request reviews before merging
+- Require status checks to pass
+- Require branches to be up to date before merging
+- Restrict direct pushes (use PRs only)
+
+### Phase-Based Development
+
+For this project, align branches with development phases:
+
+- **Phase 0**: Completed on `master`
+- **Phase 1**: Create `develop` branch, then feature branches like:
+  - `feature/phase1-architecture-design`
+  - `feature/phase1-gemini-integration`
+  - `feature/phase1-logging-infrastructure`
+- **Phase 2**: Continue on `develop` with feature branches:
+  - `feature/phase2-chromadb-setup`
+  - `feature/phase2-rag-implementation`
+- And so on...
+
+### Quick Reference Commands
+
+```bash
+# View all branches
+git branch -a
+
+# Switch to develop
+git checkout develop
+
+# Create feature branch
+git checkout -b feature/your-feature-name
+
+# Update feature branch with latest develop
+git checkout feature/your-feature
+git rebase develop
+
+# View branch status
+git status
+
+# View commit history
+git log --oneline --graph --all
+
+# Delete local branch
+git branch -d branch-name
+
+# Delete remote branch
+git push origin --delete branch-name
+```
+
+### Best Practices
+
+1. **Keep branches focused**: One feature per branch
+2. **Commit often**: Small, logical commits with clear messages
+3. **Sync regularly**: Rebase or merge `develop` into your feature branch frequently
+4. **Test before merging**: Ensure your feature works before creating PR
+5. **Clean up**: Delete merged branches to keep repository clean
+6. **Document**: Update EXECUTION_PLAN.md when starting/completing major features
+
+---
+
 ## Phase 0: Project Initialization
 
 ### 0.1 Repository Setup
-- [ ] **Initialize Git repository:**
-  - Set up version control
-  - Create `.gitignore` for Python and environment files
-  - Initialize README.md with project overview
-  - Set up branch strategy (main, develop, feature branches)
+- [x] **Initialize Git repository:**
+  - [x] Set up version control
+  - [x] Create `.gitignore` for Python and environment files
+  - [x] Initialize README.md with project overview
+  - [x] Set up branch strategy (see Git Branch Management Strategy section above)
+  - [x] Configure remote repository
+  - [x] Make initial commit
 
 - [ ] **Project directory structure:**
   ```
