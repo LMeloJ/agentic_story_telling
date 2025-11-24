@@ -15,8 +15,33 @@ from src.config.config_loader import Config, get_config, reload_config
 @pytest.fixture
 def temp_dir() -> Generator[Path, None, None]:
     """Create a temporary directory for test files."""
-    with tempfile.TemporaryDirectory() as tmpdir:
-        yield Path(tmpdir)
+    # Use a custom cleanup that handles Windows file locks
+    import atexit
+    import shutil
+    
+    tmpdir = tempfile.mkdtemp()
+    tmpdir_path = Path(tmpdir)
+    
+    def cleanup():
+        """Cleanup function that handles Windows file locks."""
+        try:
+            # On Windows, files might be locked - try multiple times
+            import time
+            for _ in range(3):
+                try:
+                    shutil.rmtree(tmpdir_path, ignore_errors=True)
+                    break
+                except (PermissionError, OSError):
+                    time.sleep(0.1)
+        except Exception:
+            pass  # Ignore cleanup errors
+    
+    atexit.register(cleanup)
+    
+    yield tmpdir_path
+    
+    # Attempt cleanup
+    cleanup()
 
 
 @pytest.fixture

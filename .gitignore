@@ -50,6 +50,7 @@ venv.bak/
 data/chroma_db/
 data/*.db
 data/*.sqlite
+data/
 
 # Logs
 *.log

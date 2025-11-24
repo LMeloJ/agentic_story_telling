@@ -1,4 +1,28 @@
-# API Call Visualization with LangSmith
+# Dynevi Development Progress & Tracing
+
+## Current Status
+
+**Phase 1: ✅ COMPLETE** - Foundation & Architecture Design
+- Gemini API integration with circuit breaker
+- TTS service with caching
+- Logging infrastructure
+- Configuration management
+- Complete test suite (44 tests)
+
+**Phase 2: 🟢 IN PROGRESS (95% Complete)** - Memory System Implementation
+- ChromaDB setup with 4 collections
+- Sentence-transformers embedding model
+- Semantic search with time-weighted retrieval
+- Context window management
+- Memory utilities (chunking, importance scoring, consolidation)
+- Health checks and backup functionality
+- Test suite (20+ tests)
+
+**Next Phase:** Phase 3 - NPC Agent System
+
+---
+
+## API Call Visualization with LangSmith
 
 ## Quick Start
 
@@ -24,6 +48,8 @@ LANGSMITH_PROJECT=dynevi  # Optional, defaults to "dynevi"
 - Cache hit/miss status
 - Generation duration
 - Provider information
+
+✅ **ChromaDB operations** - Memory storage and retrieval (to be added in future)
 
 ## View Your Traces
 
