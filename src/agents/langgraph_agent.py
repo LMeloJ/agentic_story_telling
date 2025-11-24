@@ -502,9 +502,24 @@ class LangGraphAgent(NPCAgent):
             lines.append(f"{speaker}: {msg.content}")
         return "\n".join(lines)
     
+    def _serialize_datetime_objects(self, obj: Any) -> Any:
+        """Recursively serialize datetime objects to ISO format strings."""
+        if isinstance(obj, datetime):
+            return obj.isoformat()
+        elif isinstance(obj, dict):
+            return {key: self._serialize_datetime_objects(value) for key, value in obj.items()}
+        elif isinstance(obj, list):
+            return [self._serialize_datetime_objects(item) for item in obj]
+        elif isinstance(obj, tuple):
+            return tuple(self._serialize_datetime_objects(item) for item in obj)
+        else:
+            return obj
+    
     def _format_world_state(self, world_state: Dict[str, Any]) -> str:
         """Format world state for context."""
-        return json.dumps(world_state, indent=2)
+        # Serialize datetime objects before JSON encoding
+        serialized_state = self._serialize_datetime_objects(world_state)
+        return json.dumps(serialized_state, indent=2, default=str)
     
     def _build_system_prompt(self, profile: NPCProfile) -> str:
         """Build system prompt for Gemini API."""

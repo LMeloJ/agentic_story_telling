@@ -8,6 +8,7 @@ from datetime import datetime
 
 from src.models.memory import MemoryChunk, MemoryMetadata
 from src.memory.memory_types import Memory
+from src.memory.chromadb_memory_system import ChromaDBMemorySystem
 
 
 def chunk_text(text: str, chunk_size: int = 500, chunk_overlap: int = 50) -> List[str]:
@@ -313,3 +314,29 @@ def apply_memory_decay(memories: List[Memory], decay_hours: float = 168.0) -> Li
     
     return memories
 
+
+def clear_all_memories(memory_system: ChromaDBMemorySystem) -> None:
+    """
+    Clear all memories from all collections in the memory system.
+    
+    Args:
+        memory_system: The ChromaDB memory system instance
+    """
+    collections = [
+        memory_system.COLLECTION_NPC_MEMORIES,
+        memory_system.COLLECTION_WORLD_KNOWLEDGE,
+        memory_system.COLLECTION_CHARACTER_PROFILES,
+        memory_system.COLLECTION_RELATIONSHIP_GRAPH,
+    ]
+    
+    for collection_name in collections:
+        try:
+            coll = memory_system._get_collection(collection_name)
+            results = coll.get()
+            all_ids = results['ids']
+            
+            if all_ids:
+                coll.delete(ids=all_ids)
+                memory_system.logger.info(f"Cleared {len(all_ids)} memories from {collection_name}")
+        except Exception as e:
+            memory_system.logger.warning(f"Error clearing {collection_name}: {e}")

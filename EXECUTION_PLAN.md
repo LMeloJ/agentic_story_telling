@@ -591,3 +591,108 @@ This document tracks the execution progress of the Dynevi immersive storytelling
 **Next Steps:**
 - Begin Phase 4: Story Orchestration (world state management, multi-NPC coordination)
 
+---
+
+## Phase 4: Story Orchestration
+
+### 4.1 Story State Management
+- [x] **World state system:**
+  - [x] Define world state schema (locations, events, timeline) - Already exists in Phase 1
+  - [x] Implement state persistence (`ConcreteStoryOrchestrator` with in-memory storage)
+  - [x] State versioning for story branching (version field in WorldState)
+  - [x] Event system (triggers, consequences) - Event model with consequences field
+
+- [x] **Multi-NPC coordination:**
+  - [x] NPC interaction scheduling (`MultiPartyConversation` class)
+  - [x] Shared context management (world state passed to all NPCs)
+  - [x] Relationship updates based on interactions (Relationship model tracking)
+  - [x] Conflict resolution for contradictory states (via world state updates)
+
+### 4.2 Dialog Flow Management
+- [x] **Conversation orchestration:**
+  - [x] Turn-taking system (`TurnTakingStrategy` enum with ROUND_ROBIN, NATURAL, PRIORITY, RANDOM)
+  - [x] Multi-party conversations (`MultiPartyConversation` class)
+  - [x] Conversation branching based on player choices (via `player_input` parameter)
+  - [x] Narrative pacing control (configurable number of turns per `progress_story` call)
+
+- [x] **Story progression:**
+  - [x] Event triggers and story beats (Event model with importance scores)
+  - [x] NPC goal tracking (goals in NPCProfile, tracked in world state)
+  - [x] Relationship evolution (Relationship model with history tracking)
+  - [x] World state updates from conversations (automatic updates in `_update_world_state_from_turn`)
+
+**Phase 4 Status: ✅ COMPLETE**
+
+### Progress Log - Phase 4
+
+### 2024-11-23 - Phase 4 Implementation Completed
+- ✅ Created `ConcreteStoryOrchestrator` implementing `StoryOrchestrator` interface
+- ✅ Implemented `ExpeditionSystem` with:
+  - `Expedition` and `ExpeditionEvent` models
+  - `ExpeditionAgent` using Gemini API to generate realistic expedition events
+  - Support for multiple expedition types (GATHER_MATERIALS, GATHER_FOOD, GATHER_WATER, GATHER_MEDICINAL_PLANTS)
+  - Quantitative resource tracking (liters, units, doses)
+- ✅ Created `MultiPartyConversation` system with:
+  - Turn-taking strategies (ROUND_ROBIN, NATURAL, PRIORITY, RANDOM)
+  - Fair rotation ensuring all NPCs get turns
+  - Information sharing decision logic (NPCs decide what to share based on personality)
+  - Conversation history tracking
+- ✅ Implemented world state management:
+  - Resource level tracking (water_liters, food_units, medicine_doses)
+  - Supply level calculation (low/medium/high based on quantities)
+  - Material collection tracking
+  - Event timeline management
+- ✅ Created crashed airship scenario configuration:
+  - Three NPCs: Captain Marcus (injured), Dr. Elena (doctor), Engineer Alex
+  - Initial world state with locations and events
+  - Complete NPC profiles with personalities and relationships
+- ✅ Created comprehensive test suite (12 tests, all passing)
+- ✅ Created full day simulation script (`run_full_day_scenario.py`)
+- ✅ Fixed datetime serialization issues for JSON compatibility
+- ✅ Fixed turn-taking to ensure fair rotation
+- ✅ Added memory clearing functionality for fresh starts
+
+**Key Features Implemented:**
+1. **Story Orchestration** - Complete story state management with world state updates
+2. **Expedition System** - AI-generated expedition events with quantitative resource gathering
+3. **Multi-Party Conversations** - Natural turn-taking with fair rotation
+4. **Information Sharing** - NPCs decide what expedition events to share based on personality
+5. **Resource Management** - Quantitative tracking of water, food, medicine, and materials
+6. **World State Impact** - Expeditions update resource levels and supply status
+7. **Scenario Configuration** - Complete crashed airship survival scenario
+
+**Files Created:**
+- `src/orchestration/concrete_orchestrator.py` - Story orchestrator implementation (573 lines)
+- `src/orchestration/expedition_system.py` - Expedition event system (246 lines)
+- `src/orchestration/multi_party_conversation.py` - Multi-party conversation management (452 lines)
+- `src/orchestration/world_state_utils.py` - World state serialization utilities (36 lines)
+- `config/crashed_airship_scenario.json` - Complete scenario configuration (148 lines)
+- `scripts/create_crashed_airship_story.py` - Basic story demo script (172 lines)
+- `scripts/run_full_day_scenario.py` - Full day simulation script (515 lines)
+- `tests/test_story_orchestration.py` - Comprehensive test suite (374 lines)
+- `docs/PHASE4_IMPLEMENTATION.md` - Phase 4 documentation
+
+**Files Modified:**
+- `src/orchestration/__init__.py` - Added new exports
+- `src/orchestration/story_orchestrator.py` - Fixed type hints
+- `src/agents/langgraph_agent.py` - Added datetime serialization, fixed world state formatting
+- `src/memory/memory_utils.py` - Added `clear_all_memories()` function
+- `src/models/npc_profile.py` - Fixed Pydantic v2 compatibility (ConfigDict)
+- `README_TRACING.md` - Updated with Phase 4 completion status
+
+**Testing:**
+- ✅ 12 new tests covering orchestration, expeditions, and conversations
+- ✅ All tests passing (104 total tests, 100% pass rate)
+- ✅ Tests cover story initialization, progression, expeditions, turn-taking, and world state updates
+
+**Key Improvements:**
+1. **Quantitative Expeditions** - Specific quantities (liters, units, doses) for all resources
+2. **Resource Level Tracking** - Automatic calculation of supply levels (low/medium/high)
+3. **Fair Turn-Taking** - Ensures all NPCs get turns before anyone speaks twice
+4. **Memory Management** - Automatic memory clearing for fresh scenario runs
+5. **Verbose Output Suppression** - Clean output with progress bars and excessive logging disabled
+6. **World State Impact Display** - Shows how expeditions affect resource levels
+
+**Next Steps:**
+- Phase 5: Advanced Features (memory importance scoring, consistency checks, performance optimization)
+

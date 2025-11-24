@@ -31,7 +31,7 @@ class StoryOrchestrator(ABC):
         pass
     
     @abstractmethod
-    def progress_story(self, player_input: str, story_state: WorldState) -> WorldState:
+    def progress_story(self, player_input: Optional[str], story_state: WorldState) -> WorldState:
         """
         Process player input and advance the story.
         

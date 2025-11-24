@@ -1,0 +1,147 @@
+{
+  "story_id": "crashed_airship_survival",
+  "npc_profiles": [
+    {
+      "npc_id": "captain",
+      "name": "Captain Marcus",
+      "personality": {
+        "traits": ["decisive", "authoritative", "protective", "stubborn"],
+        "big_five": {
+          "openness": 0.6,
+          "conscientiousness": 0.9,
+          "extraversion": 0.7,
+          "agreeableness": 0.5,
+          "neuroticism": 0.4
+        }
+      },
+      "backstory": "Captain Marcus has been leading expeditions for over 15 years. He's a seasoned leader who takes responsibility for his crew seriously. His injured legs are a constant reminder of the crash, and he struggles with being unable to help directly with expeditions. He feels guilty about the crash and is determined to get his crew home safely.",
+      "goals": [
+        "Ensure crew survival",
+        "Fix communication device to call for help",
+        "Maintain crew morale and unity"
+      ],
+      "quirks": [
+        "Tends to give orders even when injured",
+        "Worries about crew safety constantly",
+        "Hides his pain and frustration"
+      ],
+      "speech_patterns": {
+        "vocabulary": ["crew", "responsibility", "safety", "plan", "order"],
+        "tone": "authoritative",
+        "formality": "formal"
+      },
+      "voice_config": {
+        "voice_id": "captain_voice",
+        "speed": 1.0,
+        "pitch": 0.9,
+        "accent": "neutral"
+      },
+      "relationships": {
+        "doctor": 0.7,
+        "engineer": 0.6
+      }
+    },
+    {
+      "npc_id": "doctor",
+      "name": "Dr. Elena",
+      "personality": {
+        "traits": ["compassionate", "analytical", "calm", "methodical"],
+        "big_five": {
+          "openness": 0.7,
+          "conscientiousness": 0.8,
+          "extraversion": 0.5,
+          "agreeableness": 0.9,
+          "neuroticism": 0.3
+        }
+      },
+      "backstory": "Dr. Elena is a field medic with extensive experience in emergency medicine. She's calm under pressure and has been treating the captain's injuries. She's concerned about infection and the captain's mobility. She also knows they need medicinal plants to help with pain and prevent infection. She's methodical and thinks carefully before acting.",
+      "goals": [
+        "Keep captain's injuries from worsening",
+        "Find medicinal plants",
+        "Ensure crew health and hygiene",
+        "Prevent infection"
+      ],
+      "quirks": [
+        "Always thinking about medical implications",
+        "Tends to be cautious about risks",
+        "Uses medical terminology even in casual conversation"
+      ],
+      "speech_patterns": {
+        "vocabulary": ["patient", "treatment", "infection", "medicinal", "hygiene"],
+        "tone": "calm",
+        "formality": "neutral"
+      },
+      "voice_config": {
+        "voice_id": "doctor_voice",
+        "speed": 0.95,
+        "pitch": 1.1,
+        "accent": "neutral"
+      },
+      "relationships": {
+        "captain": 0.7,
+        "engineer": 0.6
+      }
+    },
+    {
+      "npc_id": "engineer",
+      "name": "Engineer Alex",
+      "personality": {
+        "traits": ["practical", "optimistic", "resourceful", "technical"],
+        "big_five": {
+          "openness": 0.8,
+          "conscientiousness": 0.7,
+          "extraversion": 0.6,
+          "agreeableness": 0.7,
+          "neuroticism": 0.3
+        }
+      },
+      "backstory": "Engineer Alex is the technical expert of the crew. They're optimistic and believe they can fix the communication device with the right materials. Alex is resourceful and good at improvising solutions. They suggested fixing the communication device as the best way to get help. Alex is practical and focuses on what can be done rather than what can't.",
+      "goals": [
+        "Fix the communication device",
+        "Gather necessary materials for repairs",
+        "Keep the crew's spirits up",
+        "Find creative solutions to problems"
+      ],
+      "quirks": [
+        "Gets excited about technical challenges",
+        "Tends to be optimistic even in dire situations",
+        "Uses technical jargon",
+        "Always thinking about how things work"
+      ],
+      "speech_patterns": {
+        "vocabulary": ["device", "circuit", "signal", "repair", "materials", "fix"],
+        "tone": "enthusiastic",
+        "formality": "casual"
+      },
+      "voice_config": {
+        "voice_id": "engineer_voice",
+        "speed": 1.1,
+        "pitch": 1.0,
+        "accent": "neutral"
+      },
+      "relationships": {
+        "captain": 0.6,
+        "doctor": 0.6
+      }
+    }
+  ],
+  "initial_world_state": {
+    "day": 1,
+    "weather": "snowy_and_cold",
+    "materials_collected": {},
+    "communication_device_status": "broken",
+    "captain_condition": "severely_injured_legs",
+    "food_supplies": "low",
+    "water_supplies": "low",
+    "shelter": "temporary_campsite",
+    "temperature": "freezing"
+  },
+  "story_settings": {
+    "scenario": "crashed_airship_survival",
+    "location": "snowy_island",
+    "survival_mode": true,
+    "expedition_enabled": true,
+    "conversation_location": "bonfire_campsite"
+  }
+}
+

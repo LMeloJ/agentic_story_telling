@@ -3,7 +3,7 @@ NPC Profile data model.
 """
 
 from typing import List, Dict, Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 
 
 class PersonalityTraits(BaseModel):
@@ -49,8 +49,8 @@ class NPCProfile(BaseModel):
         description="Relationships with other NPCs (NPC ID -> relationship score -1.0 to 1.0)"
     )
     
-    class Config:
-        json_schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "npc_id": "example_character_1",
                 "name": "Example Character",
@@ -81,4 +81,5 @@ class NPCProfile(BaseModel):
                 "relationships": {}
             }
         }
+    )
 
