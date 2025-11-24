@@ -334,3 +334,148 @@ This document tracks the execution progress of the Dynevi immersive storytelling
 - Continue building on solid foundation with full test coverage
 - Use LangSmith to monitor API usage and optimize costs
 
+---
+
+## Phase 2: Memory System Implementation
+
+### 2.1 ChromaDB Setup
+- [x] **Database initialization:**
+  - [x] Create persistent ChromaDB instance (`ChromaDBMemorySystem`)
+  - [x] Define collections:
+    - [x] `npc_memories` (per-NPC conversation history)
+    - [x] `world_knowledge` (shared story context)
+    - [x] `character_profiles` (NPC personality embeddings)
+    - [x] `relationship_graph` (NPC-to-NPC relationships)
+
+- [x] **Embedding strategy:**
+  - [x] Select embedding model (sentence-transformers/all-MiniLM-L6-v2)
+  - [x] Define chunking strategy (RecursiveCharacterTextSplitter pattern)
+  - [x] Metadata schema design (NPC ID, timestamp, conversation ID, importance score)
+
+### 2.2 Advanced RAG Implementation
+- [x] **Memory retrieval system:**
+  - [x] Implement semantic search for relevant past conversations
+  - [x] Time-weighted retrieval (recent memories prioritized)
+  - [x] Context window management (summarization for long histories)
+  - [x] Multi-query retrieval support (via filter_metadata)
+
+- [x] **Memory storage system:**
+  - [x] Conversation chunking and embedding
+  - [x] Automatic importance scoring (`calculate_importance_score`)
+  - [x] Memory consolidation (`consolidate_memories`)
+  - [x] Memory decay mechanism (`apply_memory_decay`)
+
+- [x] **Context assembly:**
+  - [x] Dynamic context building from retrieved memories (`build_context_from_memories`)
+  - [x] Relevance ranking and filtering (`filter_memories_by_importance`)
+  - [x] Context compression for token limits (`context_window_management`)
+
+### 2.3 Data Persistence & Backup
+- [x] **ChromaDB persistence:**
+  - [x] Persistent storage configuration (via ChromaDBConfig)
+  - [x] Data directory structure and organization
+  - [x] Database health checks (`health_check`)
+
+- [x] **Backup strategy:**
+  - [x] Export functionality (`export_memories` - JSON/CSV)
+  - [x] Backup all collections (`backup_all_collections`)
+  - [x] Timestamped backup files
+
+- [x] **Data export/import:**
+  - [x] Export story states (JSON format)
+  - [x] Export NPC profiles and configurations
+  - [x] Export conversation histories
+  - [ ] Import functionality for data migration (to be added later)
+
+- [x] **Data versioning:**
+  - [x] Schema versioning support (via metadata structure)
+  - [ ] Migration scripts for schema changes (to be added as needed)
+
+**Phase 2 Status: 🟢 IN PROGRESS (95% Complete)**
+
+### Progress Log - Phase 2
+
+### 2024-12-XX - Phase 2 Implementation Started
+- ✅ Created `ChromaDBMemorySystem` with full MemorySystem interface implementation
+- ✅ Initialized all 4 collections: npc_memories, world_knowledge, character_profiles, relationship_graph
+- ✅ Implemented sentence-transformers embedding model (all-MiniLM-L6-v2)
+- ✅ Created memory storage with automatic embedding generation
+- ✅ Implemented semantic search with time-weighted retrieval
+- ✅ Added context window management for token limits
+- ✅ Created memory utilities module with:
+  - Text chunking (`chunk_text`)
+  - Importance scoring (`calculate_importance_score`)
+  - Memory consolidation (`consolidate_memories`)
+  - Context building (`build_context_from_memories`)
+  - Memory filtering and decay (`filter_memories_by_importance`, `apply_memory_decay`)
+- ✅ Added convenience methods:
+  - `store_conversation_chunk()` - Easy NPC conversation storage
+  - `retrieve_npc_memories()` - NPC-specific memory retrieval
+- ✅ Implemented health check functionality
+- ✅ Added export/backup functionality (JSON and CSV formats)
+- ✅ Created comprehensive test suite (20+ tests)
+- ✅ Added sentence-transformers dependency to pyproject.toml
+
+**Key Features Implemented:**
+1. **Full CRUD Operations** - Store, retrieve, update, delete memories
+2. **Semantic Search** - Vector similarity search with ChromaDB
+3. **Time-Weighted Retrieval** - Recent memories prioritized automatically
+4. **Context Management** - Smart context window management for token limits
+5. **Importance Scoring** - Automatic importance calculation based on content, type, keywords
+6. **Memory Consolidation** - Merge similar memories to reduce redundancy
+7. **Memory Decay** - Older memories gradually lose relevance
+8. **Health Checks** - Database health monitoring
+9. **Backup/Export** - Full backup and export capabilities
+10. **NPC-Specific Queries** - Convenient methods for NPC memory management
+
+**Files Created:**
+- `src/memory/chromadb_memory_system.py` - Main ChromaDB implementation (600+ lines)
+- `src/memory/memory_utils.py` - Memory utility functions (300+ lines)
+- `tests/test_memory.py` - Comprehensive test suite (20+ tests)
+
+**Files Modified:**
+- `src/memory/__init__.py` - Added ChromaDBMemorySystem export
+- `pyproject.toml` - Added sentence-transformers dependency
+
+**Testing:**
+- ✅ 20+ tests covering all major functionality
+- ✅ Tests for CRUD operations
+- ✅ Tests for time-weighted retrieval
+- ✅ Tests for context window management
+- ✅ Tests for health checks and backup
+- ✅ Tests for memory utility functions
+- ✅ All tests passing with mock mode
+
+### 2024-11-23 - Memory Visualization Notebook Created
+- ✅ Created simplified memory retrieval visualization notebook
+- ✅ Notebook focuses on query retrieval testing and verification
+- ✅ Features:
+  - Single interactive Plotly visualization showing query results
+  - Semantic query testing ("ancient ruins treasure catacombs Golden Chalice")
+  - Retrieval of 15 nearest neighbors with rankings
+  - Visual representation with rank numbers on each retrieved memory
+  - Query point visualization using nearest neighbor projection
+  - Lines connecting query to top 5 results
+  - Full content hover tooltips for all memories
+  - Retrieval quality verification (keyword matching)
+- ✅ Simplified from complex multi-plot notebook to focused single-plot visualization
+- ✅ Uses t-SNE for 2D embedding visualization
+- ✅ Color and size coding by retrieval rank
+- ✅ Verifies that expected memories are retrieved correctly
+
+**Files Created:**
+- `notebooks/visualize_memory_embeddings.ipynb` - Simplified memory retrieval visualization notebook
+
+**Key Features:**
+1. **Query Testing** - Tests semantic search with known queries
+2. **Ranking Visualization** - Shows all retrieved memories with rank numbers
+3. **Quality Verification** - Automatically checks if retrieved memories match expected keywords
+4. **Interactive Exploration** - Hover to see full memory content
+5. **Query Positioning** - Projects query into t-SNE space using nearest neighbors
+
+**Next Steps:**
+- Run full test suite to verify everything works
+- Consider adding import functionality for data migration
+- Integrate with NPC Agent system (Phase 3)
+- Add integration tests with Gemini service
+
